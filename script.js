@@ -484,6 +484,7 @@ function renderNews() {
 
 let carouselTimer = null;
 let currentSlide = 0;
+let carouselListenersAttached = false;
 
 function initCarousel() {
   const newsGrid = document.getElementById('newsGrid');
@@ -508,13 +509,20 @@ function initCarousel() {
 
   currentSlide = 0;
 
-  dotsContainer.addEventListener('click', e => {
-    const dot = e.target.closest('.carousel-dot');
-    if (dot) goToSlide(parseInt(dot.dataset.index));
-  });
+  // renderNews() can re-run this after a Firestore sync, but newsPrev/newsNext/newsDots
+  // are static elements reused across calls — only attach these listeners once ever,
+  // or every re-render would stack another listener and multiply each click's effect.
+  if (!carouselListenersAttached) {
+    dotsContainer.addEventListener('click', e => {
+      const dot = e.target.closest('.carousel-dot');
+      if (dot) goToSlide(parseInt(dot.dataset.index));
+    });
 
-  prevBtn.addEventListener('click', () => { prevSlide(); resetTimer(); });
-  nextBtn.addEventListener('click', () => { nextSlide(); resetTimer(); });
+    prevBtn.addEventListener('click', () => { prevSlide(); resetTimer(); });
+    nextBtn.addEventListener('click', () => { nextSlide(); resetTimer(); });
+
+    carouselListenersAttached = true;
+  }
 
   carouselTimer = setInterval(nextSlide, 15000);
 }
