@@ -417,15 +417,6 @@ body.scrolled .nav-drawer {
   color: var(--purple-700);
 }
 
-.hero-arabic {
-  font-size: 1.05rem;
-  font-weight: 400;
-  color: var(--muted);
-  margin-bottom: 22px;
-  direction: rtl;
-  font-family: 'Inter', sans-serif;
-}
-
 .hero-desc {
   font-size: 1.02rem;
   color: var(--ink-soft);

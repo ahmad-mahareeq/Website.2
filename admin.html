@@ -33,8 +33,7 @@
       --radius: 10px;
       --radius-sm: 8px;
       --transition: 0.16s ease;
-      --sidebar-w: 236px;
-      --header-h: 60px;
+      --sidebar-w: 240px;
       --serif: 'DM Serif Display', Georgia, serif;
       --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
@@ -113,21 +112,6 @@
       color: white;
       border-color: #c22b3d;
     }
-    .btn-success {
-      background: var(--orange);
-      color: white;
-    }
-    .btn-success:hover {
-      background: var(--orange-dark);
-    }
-    .btn-secondary {
-      background: var(--ink);
-      color: white;
-    }
-    .btn-secondary:hover {
-      background: var(--ink-soft);
-    }
-
     /* Login Page */
     .login-page {
       display: flex;
@@ -225,61 +209,60 @@
 
     /* Dashboard Layout */
     .dashboard { display: none; }
-    .dashboard-header {
-      background: var(--white);
-      border-bottom: 1px solid var(--border-soft);
-      padding: 0 24px;
-      height: var(--header-h);
+
+    .dashboard-shell {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .dashboard-sidebar {
+      flex: 0 0 var(--sidebar-w);
+      display: flex;
+      flex-direction: column;
+      background: var(--purple);
       position: sticky;
       top: 0;
-      z-index: 100;
+      height: 100vh;
     }
-    .dashboard-header .header-left {
+
+    .sidebar-brand {
       display: flex;
       align-items: center;
       gap: 12px;
+      padding: 22px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      flex-shrink: 0;
     }
-    .dashboard-header .header-left img {
-      height: 30px;
+    .sidebar-brand img {
+      height: 36px;
+      width: 36px;
       border-radius: 50%;
+      object-fit: contain;
+      flex-shrink: 0;
     }
-    .dashboard-header .header-left h2 {
-      font-size: 0.95rem;
+    .sidebar-brand-text h2 {
+      font-size: 0.92rem;
       font-weight: 700;
-      color: var(--purple);
+      color: #fff;
+      line-height: 1.2;
     }
-    .dashboard-header .header-actions {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    /* Body: sidebar + content */
-    .dashboard-body {
-      display: flex;
-      align-items: flex-start;
-      max-width: 1400px;
-      margin: 0 auto;
+    .sidebar-brand-text span {
+      font-size: 0.62rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
 
     /* Sidebar Tabs */
     .dashboard-tabs {
-      flex: 0 0 var(--sidebar-w);
+      flex: 1;
       display: flex;
       flex-direction: column;
       gap: 2px;
-      padding: 20px 12px;
-      position: sticky;
-      top: var(--header-h);
-      height: calc(100vh - var(--header-h));
+      padding: 16px 12px;
       overflow-y: auto;
-      background: var(--purple);
     }
     .tab-btn {
       display: flex;
@@ -310,6 +293,59 @@
       box-shadow: inset 3px 0 0 var(--orange);
     }
     .tab-btn.active i { color: var(--orange-light); }
+
+    .sidebar-footer {
+      flex-shrink: 0;
+      padding: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .sidebar-footer a, .sidebar-footer button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      text-align: left;
+      padding: 9px 14px;
+      border-radius: var(--radius-sm);
+      border: none;
+      background: transparent;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+    }
+    .sidebar-footer i { width: 16px; text-align: center; font-size: 0.85rem; }
+    .sidebar-footer a:hover, .sidebar-footer button:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+
+    /* Main column */
+    .dashboard-main {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dashboard-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      background: var(--white);
+      border-bottom: 1px solid var(--border-soft);
+    }
 
     /* Tab Content */
     .dashboard-content {
@@ -600,24 +636,23 @@
     }
 
     @media (max-width: 880px) {
-      .dashboard-body { flex-direction: column; }
-      .dashboard-tabs {
+      .dashboard-shell { flex-direction: column; }
+      .dashboard-sidebar {
         flex: none;
         width: 100%;
+        height: auto;
+        position: static;
+      }
+      .dashboard-tabs {
         flex-direction: row;
         gap: 4px;
-        padding: 12px 4%;
-        position: static;
-        height: auto;
+        padding: 10px 4%;
         overflow-x: auto;
-        overflow-y: visible;
-        box-shadow: var(--shadow-md);
       }
       .tab-btn { flex-shrink: 0; white-space: nowrap; }
-      .dashboard-header { flex-direction: column; align-items: flex-start; height: auto; padding: 12px 4%; }
-      .dashboard-header .header-left h2 { font-size: 0.9rem; }
-      .dashboard-header .header-actions { width: 100%; flex-wrap: wrap; }
-      .dashboard-header .header-actions .btn { flex: 1; min-width: 0; justify-content: center; font-size: 0.75rem; padding: 8px 12px; }
+      .sidebar-footer { flex-direction: row; }
+      .sidebar-footer a, .sidebar-footer button { flex: 1; justify-content: center; }
+      .dashboard-topbar { padding: 12px 4%; }
       .add-form .form-row,
       .add-form .form-row-3,
       .add-form .form-row-4 { grid-template-columns: 1fr; }
@@ -631,10 +666,9 @@
     }
 
     @media (max-width: 480px) {
-      .dashboard-header .header-left { gap: 10px; }
-      .dashboard-header .header-left img { height: 26px; }
-      .dashboard-header .header-left h2 { font-size: 0.85rem; }
-      .dashboard-header .header-actions .btn { font-size: 0.7rem; padding: 6px 10px; }
+      .sidebar-brand img { height: 30px; width: 30px; }
+      .sidebar-brand-text h2 { font-size: 0.85rem; }
+      .dashboard-topbar .btn { font-size: 0.7rem; padding: 8px 14px; }
       .tab-btn { padding: 8px 12px; font-size: 0.78rem; }
       .add-form { padding: 16px; }
       .add-form .form-group { margin-bottom: 14px; }
@@ -713,34 +747,41 @@
 
   <!-- Dashboard -->
   <div class="dashboard" id="dashboard">
-    <!-- Header -->
-    <div class="dashboard-header">
-      <div class="header-left">
-        <img src="logo-small.png" alt="POIG" onerror="this.style.display='none'">
-        <h2>Admin Dashboard</h2>
-      </div>
-      <div class="header-actions">
-        <button class="btn btn-success btn-sm" onclick="saveAll()"><i class="fas fa-save"></i> Save Changes</button>
-        <button class="btn btn-outline btn-sm" onclick="cancelAll()"><i class="fas fa-undo"></i> Cancel</button>
-        <a href="/" class="btn btn-secondary btn-sm" onclick="showToast('Loading website...','')"><i class="fas fa-external-link-alt"></i> Return to Website</a>
-        <button class="btn btn-secondary btn-sm" onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
-      </div>
-    </div>
+    <div class="dashboard-shell">
+      <!-- Sidebar -->
+      <aside class="dashboard-sidebar">
+        <div class="sidebar-brand">
+          <img src="logo-small.png" alt="POIG" onerror="this.style.display='none'">
+          <div class="sidebar-brand-text">
+            <h2>Admin Dashboard</h2>
+            <span>POIG</span>
+          </div>
+        </div>
 
-    <!-- Body -->
-    <div class="dashboard-body">
-    <!-- Tabs -->
-    <div class="dashboard-tabs">
-      <button class="tab-btn active" data-tab="team" onclick="switchTab('team')"><i class="fas fa-users"></i> Team Members</button>
-      <button class="tab-btn" data-tab="activities" onclick="switchTab('activities')"><i class="fas fa-calendar-check"></i> Activities</button>
-      <button class="tab-btn" data-tab="events" onclick="switchTab('events')"><i class="fas fa-calendar-alt"></i> Upcoming Events</button>
-      <button class="tab-btn" data-tab="news" onclick="switchTab('news')"><i class="fas fa-newspaper"></i> Latest News</button>
-      <button class="tab-btn" data-tab="content" onclick="switchTab('content')"><i class="fas fa-pen"></i> Page Content</button>
-      <button class="tab-btn" data-tab="admins" id="adminsTabBtn" onclick="switchTab('admins')" style="display:none"><i class="fas fa-user-shield"></i> Admins</button>
-    </div>
+        <nav class="dashboard-tabs">
+          <button class="tab-btn active" data-tab="team" onclick="switchTab('team')"><i class="fas fa-users"></i> Team Members</button>
+          <button class="tab-btn" data-tab="activities" onclick="switchTab('activities')"><i class="fas fa-calendar-check"></i> Activities</button>
+          <button class="tab-btn" data-tab="events" onclick="switchTab('events')"><i class="fas fa-calendar-alt"></i> Upcoming Events</button>
+          <button class="tab-btn" data-tab="news" onclick="switchTab('news')"><i class="fas fa-newspaper"></i> Latest News</button>
+          <button class="tab-btn" data-tab="content" onclick="switchTab('content')"><i class="fas fa-pen"></i> Page Content</button>
+          <button class="tab-btn" data-tab="admins" id="adminsTabBtn" onclick="switchTab('admins')" style="display:none"><i class="fas fa-user-shield"></i> Admins</button>
+        </nav>
 
-    <!-- Content -->
-    <div class="dashboard-content">
+        <div class="sidebar-footer">
+          <a href="/" onclick="showToast('Loading website...','')"><i class="fas fa-external-link-alt"></i> Return to Website</a>
+          <button onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <div class="dashboard-main">
+        <div class="dashboard-topbar">
+          <button class="btn btn-outline btn-sm" onclick="cancelAll()"><i class="fas fa-undo"></i> Cancel</button>
+          <button class="btn btn-primary btn-sm" onclick="saveAll()"><i class="fas fa-save"></i> Save Changes</button>
+        </div>
+
+        <!-- Content -->
+        <div class="dashboard-content">
       <!-- Team Tab -->
       <div class="tab-panel active" id="panel-team">
         <h2><i class="fas fa-users"></i> Team Members</h2>
@@ -889,7 +930,8 @@
         <h3 style="font-size:1.2rem;font-weight:700;color:var(--purple);margin:32px 0 16px">Current Admins</h3>
         <div class="items-list" id="adminsList"></div>
       </div>
-    </div>
+        </div>
+      </div>
     </div>
   </div>
 
