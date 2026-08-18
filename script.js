@@ -487,7 +487,7 @@ let currentSlide = 0;
 
 function initCarousel() {
   const newsGrid = document.getElementById('newsGrid');
-  const cards = document.querySelectorAll('#newsGrid > .news-card');
+  const cards = Array.from(document.querySelectorAll('#newsGrid > .news-card'));
   const dotsContainer = document.getElementById('newsDots');
   const prevBtn = document.getElementById('newsPrev');
   const nextBtn = document.getElementById('newsNext');
