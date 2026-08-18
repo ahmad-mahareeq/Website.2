@@ -3,7 +3,6 @@
    ============================================ */
 
 // --- Nav Scroll Effect ---
-const navMain = document.getElementById('navMain');
 const navHamburger = document.getElementById('navHamburger');
 const navDrawer = document.getElementById('navDrawer');
 
@@ -513,6 +512,9 @@ function initCarousel() {
     const dot = e.target.closest('.carousel-dot');
     if (dot) goToSlide(parseInt(dot.dataset.index));
   });
+
+  prevBtn.addEventListener('click', () => { prevSlide(); resetTimer(); });
+  nextBtn.addEventListener('click', () => { nextSlide(); resetTimer(); });
 
   carouselTimer = setInterval(nextSlide, 15000);
 }
