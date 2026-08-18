@@ -251,7 +251,7 @@
     .dashboard-header .header-left h2 {
       font-size: 0.95rem;
       font-weight: 700;
-      color: var(--ink);
+      color: var(--purple);
     }
     .dashboard-header .header-actions {
       display: flex;
@@ -279,7 +279,7 @@
       top: var(--header-h);
       height: calc(100vh - var(--header-h));
       overflow-y: auto;
-      border-right: 1px solid var(--border-soft);
+      background: var(--purple);
     }
     .tab-btn {
       display: flex;
@@ -294,20 +294,22 @@
       font-family: var(--sans);
       font-size: 0.85rem;
       font-weight: 600;
-      color: var(--ink-soft);
+      color: rgba(255, 255, 255, 0.68);
       cursor: pointer;
       transition: background var(--transition), color var(--transition);
     }
-    .tab-btn i { width: 16px; text-align: center; color: var(--muted); font-size: 0.85rem; transition: color var(--transition); }
+    .tab-btn i { width: 16px; text-align: center; color: rgba(255, 255, 255, 0.45); font-size: 0.85rem; transition: color var(--transition); }
     .tab-btn:hover {
-      background: var(--off);
-      color: var(--ink);
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
     }
+    .tab-btn:hover i { color: rgba(255, 255, 255, 0.75); }
     .tab-btn.active {
-      background: var(--purple-50);
-      color: var(--purple);
+      background: rgba(255, 255, 255, 0.14);
+      color: #fff;
+      box-shadow: inset 3px 0 0 var(--orange);
     }
-    .tab-btn.active i { color: var(--purple); }
+    .tab-btn.active i { color: var(--orange-light); }
 
     /* Tab Content */
     .dashboard-content {
@@ -609,8 +611,7 @@
         height: auto;
         overflow-x: auto;
         overflow-y: visible;
-        border-right: none;
-        border-bottom: 1px solid var(--border-soft);
+        box-shadow: var(--shadow-md);
       }
       .tab-btn { flex-shrink: 0; white-space: nowrap; }
       .dashboard-header { flex-direction: column; align-items: flex-start; height: auto; padding: 12px 4%; }
@@ -858,9 +859,13 @@
         </div>
         <div class="glass-card add-form">
           <h3 style="font-size:1.1rem;font-weight:700;color:var(--purple);margin-bottom:16px">Social Media &amp; Footer</h3>
-          <div class="form-row-4">
+          <div class="form-row-3">
             <div class="form-group"><label>Instagram URL</label><input type="url" id="pcInsta" placeholder="https://instagram.com/..."></div>
+            <div class="form-group"><label>Facebook URL</label><input type="url" id="pcFacebook" placeholder="https://facebook.com/..."></div>
             <div class="form-group"><label>LinkedIn URL</label><input type="url" id="pcLinkedin" placeholder="https://linkedin.com/..."></div>
+          </div>
+          <div class="form-row-3">
+            <div class="form-group"><label>WhatsApp URL</label><input type="url" id="pcWhatsapp" placeholder="https://chat.whatsapp.com/..."></div>
             <div class="form-group"><label>Contact Email</label><input type="email" id="pcEmail" placeholder="email@example.com"></div>
             <div class="form-group"><label>Footer Text</label><input type="text" id="pcFooter" placeholder="Copyright text"></div>
           </div>
@@ -1106,7 +1111,9 @@
       ],
       social: {
         instagram: 'https://www.instagram.com/poig.palestine/',
+        facebook: 'https://www.facebook.com/people/Palestinian-Ophthalmology-Interest-Group-POIG/61588352620304/',
         linkedin: 'https://www.linkedin.com/company/poig',
+        whatsapp: 'https://chat.whatsapp.com/Lqb2zIHzDwMFWjWlgqXZn9',
         email: 'poig.palestine@gmail.com'
       },
       footerText: '\u00a9 2025 Palestinian Ophthalmology Interest Group. All rights reserved.'
@@ -2105,7 +2112,9 @@
       document.getElementById('pcAboutTitle').value = c.aboutTitle || '';
       document.getElementById('pcAboutDesc').value = c.aboutDescription || '';
       document.getElementById('pcInsta').value = (c.social && c.social.instagram) || '';
+      document.getElementById('pcFacebook').value = (c.social && c.social.facebook) || '';
       document.getElementById('pcLinkedin').value = (c.social && c.social.linkedin) || '';
+      document.getElementById('pcWhatsapp').value = (c.social && c.social.whatsapp) || '';
       document.getElementById('pcEmail').value = (c.social && c.social.email) || '';
       document.getElementById('pcFooter').value = c.footerText || '';
       renderStatsForm(c.stats || []);
@@ -2168,7 +2177,9 @@
         stats: stats,
         social: {
           instagram: document.getElementById('pcInsta').value.trim(),
+          facebook: document.getElementById('pcFacebook').value.trim(),
           linkedin: document.getElementById('pcLinkedin').value.trim(),
+          whatsapp: document.getElementById('pcWhatsapp').value.trim(),
           email: document.getElementById('pcEmail').value.trim()
         },
         footerText: document.getElementById('pcFooter').value.trim()

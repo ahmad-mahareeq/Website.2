@@ -167,7 +167,9 @@ const DEFAULT_PAGE_CONTENT = {
   ],
   social: {
     instagram: 'https://www.instagram.com/poig.palestine/',
+    facebook: 'https://www.facebook.com/people/Palestinian-Ophthalmology-Interest-Group-POIG/61588352620304/',
     linkedin: 'https://www.linkedin.com/company/poig',
+    whatsapp: 'https://chat.whatsapp.com/Lqb2zIHzDwMFWjWlgqXZn9',
     email: 'poig.palestine@gmail.com'
   },
   footerText: '\u00a9 2025 Palestinian Ophthalmology Interest Group. All rights reserved.'
@@ -324,8 +326,12 @@ function renderPageContent() {
   if (socialLinks && c.social) {
     const insta = socialLinks.querySelector('a[href*="instagram"]');
     if (insta && c.social.instagram) insta.href = c.social.instagram;
+    const facebook = socialLinks.querySelector('a[href*="facebook"]');
+    if (facebook && c.social.facebook) facebook.href = c.social.facebook;
     const linkedin = socialLinks.querySelector('a[href*="linkedin"]');
     if (linkedin && c.social.linkedin) linkedin.href = c.social.linkedin;
+    const whatsapp = socialLinks.querySelector('a[href*="whatsapp"]');
+    if (whatsapp && c.social.whatsapp) whatsapp.href = c.social.whatsapp;
   }
 
   const contactEmail = document.getElementById('contactEmail');
